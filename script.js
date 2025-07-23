@@ -1,43 +1,47 @@
-// Form Validation
-document.getElementById("contactForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-  const name = document.getElementById("name");
-  const email = document.getElementById("email");
-  const message = document.getElementById("formMessage");
+let products = [
+  { name: "Phone", price: 299, category: "Electronics" },
+  { name: "Shoes", price: 59, category: "Apparel" },
+  { name: "Bag", price: 39, category: "Apparel" },
+  { name: "Tablet", price: 399, category: "Electronics" }
+];
 
-  if (!name.value || !email.value) {
-    message.textContent = "All fields are required.";
-    message.style.color = "red";
-    return;
-  }
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email.value)) {
-    message.textContent = "Please enter a valid email.";
-    message.style.color = "red";
-    return;
-  }
-
-  message.textContent = "Form submitted successfully!";
-  message.style.color = "green";
-});
-
-// To-Do List Logic
-function addTask() {
-  const input = document.getElementById("taskInput");
-  const taskText = input.value.trim();
-
-  if (taskText === "") return;
-
-  const li = document.createElement("li");
-  li.textContent = taskText;
-
-  const removeBtn = document.createElement("button");
-  removeBtn.textContent = "Remove";
-  removeBtn.onclick = () => li.remove();
-
-  li.appendChild(removeBtn);
-  document.getElementById("taskList").appendChild(li);
-
-  input.value = "";
+function displayProducts(list) {
+  const container = document.getElementById("productContainer");
+  container.innerHTML = "";
+  list.forEach(p => {
+    const item = document.createElement("div");
+    item.textContent = `${p.name} - $${p.price}`;
+    container.appendChild(item);
+  });
 }
+
+function applyFilter() {
+  const value = document.getElementById("filter").value;
+  let filtered = products;
+  if (value !== "All") {
+    filtered = products.filter(p => p.category === value);
+  }
+  displayProducts(filtered);
+}
+
+function applySort() {
+  const value = document.getElementById("sort").value;
+  let sorted = [...products];
+  if (value === "LowToHigh") sorted.sort((a, b) => a.price - b.price);
+  if (value === "HighToLow") sorted.sort((a, b) => b.price - a.price);
+  displayProducts(sorted);
+}
+
+window.onload = () => {
+  document.getElementById("filter").innerHTML = `
+    <option>All</option>
+    <option>Electronics</option>
+    <option>Apparel</option>
+  `;
+  document.getElementById("sort").innerHTML = `
+    <option value="">None</option>
+    <option value="LowToHigh">Price: Low to High</option>
+    <option value="HighToLow">Price: High to Low</option>
+  `;
+  displayProducts(products);
+};
