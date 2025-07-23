@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fetch API Demo</title>
+</head>
+<body>
+  <h2>Random Chuck Norris Joke</h2>
+  <button onclick="getJoke()">Get Joke</button>
+  <p id="joke"></p>
+
+  <script>
+    function getJoke() {
+      fetch('https://api.chucknorris.io/jokes/random')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById("joke").textContent = data.value;
+        })
+        .catch(error => {
+          document.getElementById("joke").textContent = "Failed to fetch joke.";
+          console.error(error);
+        });
+    }
+  </script>
+</body>
+</html>

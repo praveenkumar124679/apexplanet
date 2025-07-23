@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive Quiz</title>
+</head>
+<body>
+  <h2>What is 2 + 2?</h2>
+  <button onclick="checkAnswer(3)">3</button>
+  <button onclick="checkAnswer(4)">4</button>
+  <button onclick="checkAnswer(5)">5</button>
+  <p id="result"></p>
+
+  <script>
+    function checkAnswer(ans) {
+      const result = document.getElementById("result");
+      if (ans === 4) {
+        result.textContent = "Correct!";
+        result.style.color = "green";
+      } else {
+        result.textContent = "Try again.";
+        result.style.color = "red";
+      }
+    }
+  </script>
+</body>
+</html>
