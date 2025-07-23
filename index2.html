@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Project</title>
+  <link rel="stylesheet" href="style2.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <h1>My Website</h1>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#todo">To-Do</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="grid-layout">
+    <section id="contact">
+      <h2>Contact Form</h2>
+      <form id="contactForm">
+        <label>
+          Name:
+          <input type="text" id="name" required />
+        </label>
+        <label>
+          Email:
+          <input type="email" id="email" required />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+      <p id="formMessage"></p>
+    </section>
+
+    <section id="todo">
+      <h2>To-Do List</h2>
+      <input type="text" id="taskInput" placeholder="Enter a task" />
+      <button onclick="addTask()">Add Task</button>
+      <ul id="taskList"></ul>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
